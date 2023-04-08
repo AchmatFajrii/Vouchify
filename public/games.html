@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/logo.svg" type="image/x-icon">
+    <!-- css -->
+    <link rel="stylesheet" href="css/stylegames.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Link Googlefonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Link Animasi Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Vouchify | Games</title>
+</head>
+
+<body>
+    <!-- <header class="header">
+        <div class="nav-container flex">
+            <nav class="nav flex">
+                <a href="#"><img src="img/Group 5.svg" alt="logo" class="nav-logo"></a>
+                <div class="nav-menu">
+                    <ul class="nav-list flex">
+                        <li><a href="#home" class="nav-link">Home</a></li>
+                        <li><a href="#games" class="nav-link active">Games</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="button sign-in-button">Sign In</div>
+        </div>
+    </header> -->
+    <header>
+        <div class="container p-5 relative lg:p-10">
+            <!-- Navbar Start -->
+            <nav class="flex justify-between items-center">
+                <div class="bg-primary flex items-center justify-between shadow-sm shadow-black w-[70%] p-3 rounded-2xl lg:w-[80%]">
+                    <div class="logo ml-4">
+                        <a href=""><img class="w-7 lg:w-full" src="img/logo.svg" alt=""/></a>
+                    </div>
+                    <ul class="flex items-center text-xs lg:text-base">
+                        <li class="hidden items-center py-2 px-4 mr-1 lg:flex">
+                            <label for="default-search" class="mb-2 text-sm font-medium  sr-only">Search</label>
+                            <div class="relative w-80">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                                <input type="search" id="default-search" class="block w-full p-2 pl-10 text-sm rounded-xl focus:outline-primary" placeholder="Search Games, Voucher..." required>
+                            </div>
+                        </li>
+                        <li class="bg-primary text-white py-2 px-4 rounded-2xl mr-1 transition-all ease-out hover:text-secondary">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="bg-secondary text-white py-2 px-4 rounded-2xl">
+                            <a href="games.html">Games</a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="flex items-center">
+                    <li class="mr-3 hidden lg:block"><a href=""><img class="w-7" src="img/notif.svg" alt=""></a></li>
+                    <li class="bg-primary text-white py-2 px-6 rounded-2xl shadow-sm shadow-black text-xs transition-all ease-in-out lg:text-base lg:px-9 hover:bg-secondary">
+                    <a href="">Sign In</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- NAVBAR END -->
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <!-- Main image start -->
+        <section class="main-image" data-aos="zoom-in">
+            <div class="container p-5 lg:p-10">
+                <div class="swiper-image">
+                    <div class="swiper-wrapper w-full">
+                        <a href="#"><img class="block mx-auto" src="img/jumbotron.svg" alt="game image"></a>
+                    </div>
+                    <div class="swiper-slider flex">
+                        <div class="slider active"></div>
+                        <div class="slider"></div>
+                        <div class="slider"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Main image end -->
+
+        <!-- Games start-->
+        <section class="games mt-10">
+            <div class="container p-5 lg:p-10">
+                <form action="">
+                    <div class="hidden items-center lg:flex">
+                        <label for="default-search" class="mb-2 text-sm font-medium  sr-only">Search</label>
+                        <div class="relative w-[50%] ">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </div>
+                            <input type="search" id="default-search" class="block w-full py-5 px-2 pl-10 text-sm rounded-full focus:outline-primary" placeholder="Search Games, Voucher..." required>
+                        </div>
+                    </div>
+                </form>
+                <div class="main-menu mt-5" >
+                    <ul class="main-menu-list flex">
+                        <li><a href="#" class="main-menu-link active">All Games</a></li>
+                        <li><a href="#" class="main-menu-link">Mobile</a></li>
+                        <li><a href="#" class="main-menu-link">PC Game</a></li>
+                    </ul>
+                </div>
+                <div class="game-list flex justify-center lg:justify-start">
+                    <a href="#"><img class="w-28 lg:w-full" src="img/Rectangle 10.svg" alt="game list" ></a>
+                    <a href="#"><img class="w-28 lg:w-full" src="img/Rectangle 11.svg" alt="game list"></a>
+                    <a href="#"><img class="w-28 lg:w-full" src="img/Rectangle 12.svg" alt="game list"></a>
+                    <a href="#"><img class="w-28 lg:w-full" src="img/Rectangle 7.svg" alt="game list"></a>
+                </div>
+            </div>
+        </section>
+        <!-- Games end -->
+
+        <!-- Banner start-->
+        <section class="banner flex relative z-10 items-center justify-center bg-primary w-full h-24 mt-10 lg:mt-20 lg:h-36">
+            <h1 class="text-center text-xl text-white font-bold lg:text-4xl">Win The Battle. <br> Be the Champion</h1>
+        </section>
+        <!-- Banner end -->
+    </main>
+
+    <!-- Footer start -->
+    <div class="container p-5 lg:p-10">
+        <!--👇👇👇-->
+            <footer class="mt-10 flex flex-col lg:flex-row lg:justify-around" data-aos="zoom-in-up">
+                <!-- About Section Start -->
+                <section class="about flex flex-col items-center text-sm lg:items-start lg:w-[30%]">
+                    <div class="logo">
+                        <img class="w-9 lg:w-12" src="img/logo2.svg" alt="">
+                    </div>
+                    <p class="mt-2">VocaGame menyediakan layanan Top up game dan Reseller Voucher Game termurah dan terpercaya di Indonesia. 
+                            Topup lebih dari 100 game online terkemuka dunia di 
+                            VocaGame mudah aman tanpa registrasi, pembelian instan langsung masuk dalam hitungan detik.</p>
+                </section>
+                <!-- About Section End -->
+                <!-- Location Section Start -->
+                <section class="location mt-4 lg:w-[30%]">
+                    <h5 class="text-base font-semibold">Our Location</h5>
+                    <p class="text-sm mt-2">PT DUA PULUH EMPAT JAM ONLINEGREEN LAKE CITY RUKAN GREAT WALL BLOK C NO. 16,Kel. Petir, Kec. Cipondoh, Kota Tangerang, Prov. Banten <br>
+                        <span><img class="inline w-3" src="img/phone-icon.svg" alt=""></span> Telepon: (021)22952996</p>
+                </section>
+                <!-- Location Section End -->
+                <!-- Social Media Section Start -->
+                <div class="social-media mt-4">
+                    <h5 class="text-base font-semibold">Ikuti Kami</h5>
+                    <div class="logo-sosmed">
+                        <ul class="flex mt-2">
+                            <li class="mx-1"><a href=""><img src="img/Instagram (2).svg" alt=""></a></li>
+                            <li class="mx-1"><a href=""><img src="img/tiktok (2).svg" alt=""></a></li>
+                            <li class="mx-1"><a href=""><img src="img/youtube.svg" alt=""></a></li>
+                            <li class="mx-1"><a href=""><img src="img/twitter.svg" alt=""></a></li>
+                            <li class="mx-1"><a href=""><img src="img/facebook.svg" alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Social Media Section End -->
+            </footer>
+            <div class="line bg-primary h-[1px] w-full mt-5 lg:mt-10"></div>
+            <p class="text-center text-sm font-bold mt-2 lg:text-start">Copyright © 2023 Razer Inc. All rights reserved.</p>
+        </div>
+   
+    <!-- Footer end -->
+
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
