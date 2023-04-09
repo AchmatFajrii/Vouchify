@@ -23,6 +23,17 @@
         border-left: 2px solid black;
         animation: typing 3s steps(100) infinite;
     }
+    #btn-back-to-top {
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  display: none;
+  border: none;
+  z-index: 300;
+}
+    html{
+            scroll-behavior: smooth;
+        }
 
     @keyframes slide{
         100% {

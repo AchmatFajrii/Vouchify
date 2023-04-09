@@ -797,6 +797,10 @@ video {
   border-radius: 0.75rem;
 }
 
+.border {
+  border-width: 1px;
+}
+
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(92 148 138 / var(--tw-bg-opacity));

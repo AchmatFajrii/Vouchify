@@ -17,8 +17,12 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <!-- Link Animasi Scroll -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
-<body class="font-['Roboto']">
+<body class="font-['Roboto'] transition-all ease-in-out">
+    <button class="back" type="button" id="btn-back-to-top">
+        <img src="img/back.png" alt="" width="50px">
+    </button>
     <!-- Background Start -->
     <div class="union absolute right-0 z-0">
         <img class="w-72 lg:w-full" src="img/union.svg" alt="">
@@ -243,6 +247,33 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
+    </script>
+    <script>
+        //Get the button
+let mybutton = document.getElementById("btn-back-to-top");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () {
+scrollFunction();
+};
+
+function scrollFunction() {
+if (
+document.body.scrollTop > 20 ||
+document.documentElement.scrollTop > 20
+) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", backToTop);
+
+function backToTop() {
+document.body.scrollTop = 0;
+document.documentElement.scrollTop = 0;
+}
     </script>
     <script>
         let card1 = document.querySelector('.card1')
