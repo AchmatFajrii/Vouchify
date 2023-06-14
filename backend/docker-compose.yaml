@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  server:
+    container_name: server_vouchify
+    image: vouchify:0.0.1
+    build: .
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    ports:
+      - 7314:7314
+    environment:
+      - MYSQL_ROOT_PASSWORD=~DYX.4kp
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=s91mxXXxz
+      - PORT=7134
+    depends_on:
+      - mysql_server
+
+  # ------------------------------------------------------------
+  # MySQL Database
+  # ------------------------------------------------------------
+  mysql_server:
+    container_name: db
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_DATABASE=vouchify
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=s91mxXXxz
+      - MYSQL_ROOT_PASSWORD=~DYX.4kp
+    ports:
+      - 3306:3306
+    expose:
+      - "3306"
+    volumes:
+      - mysqldata:/var/lib/mysql/
+
+volumes:
+  mysqldata: {}
+  node_modules:
