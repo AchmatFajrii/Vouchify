@@ -2,8 +2,8 @@ const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // Google Plus Strategy
-const GOOGLE_CLIENT_ID = '646344540885-ubl8t9tvl8mbmjnv8cd9iimllc5akjtb.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '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';
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
