@@ -12,43 +12,28 @@ const specialOfferService = new SpecialOfferService();
 class SpecialOfferController {
     async create(req: Request, res: Response) {
         var specialOffer, message;
-        const { voucherId } = req.body;
+        const { name, description, isActive } = req.body;
 
-        if (voucherId) {
-            const voucher = await specialOfferService.findVoucherById(voucherId);
+        const data = new CreateSpecialOfferDto();
 
-            if (voucher) {
-                const { name, description, price, from, to } = req.body;
+        data.name = name;
+        data.description = description;
+        data.isActive = isActive;
 
-                const data = new CreateSpecialOfferDto();
-
-                data.name = name;
-                data.description = description;
-                data.price = price;
-                data.from = new Date(from);
-                data.to = new Date(to);
-                data.voucherId = voucherId;
-
-                // Validation query parameter
-                const errors = await validate(data);
-                if (errors.length > 0) {
-                    return res.status(400).json({
-                        "meta": {
-                            "message": "Failed create a special offer"
-                        },
-                        "data": errors
-                    });;
-                }
-
-                specialOffer = await specialOfferService.create(data);
-
-                message = 'Success create a special offer';
-            } else {
-                message = 'Voucher not found';
-            }
-        } else {
-            message = 'Please insert voucher id';
+        // Validation query parameter
+        const errors = await validate(data);
+        if (errors.length > 0) {
+            return res.status(400).json({
+                "meta": {
+                    "message": "Failed create a special offer"
+                },
+                "data": errors
+            });;
         }
+
+        specialOffer = await specialOfferService.create(data);
+
+        message = 'Success create a special offer';
 
         return res.status(200).json({
             "meta": {
@@ -94,6 +79,17 @@ class SpecialOfferController {
         });
     }
 
+    async findActiveSpecialOffer(req: Request, res: Response) {
+        const specialOffers = await specialOfferService.findActiveSpecialOffer();
+
+        return res.status(200).json({
+            "meta": {
+                "message": "Success fetch special offer",
+            },
+            "data": toObject(specialOffers)
+        });
+    }
+
     async findOne(req: Request, res: Response) {
         const { id } = req.params;
         const specialOffer = await specialOfferService.findOne(id);
@@ -108,15 +104,13 @@ class SpecialOfferController {
 
     async update(req: Request, res: Response) {
         const { id } = req.params;
-        const { name, description, price, from, to } = req.body;
+        const { name, description, isActive } = req.body;
 
         const data = new UpdateSpecialOfferDto();
 
         data.name = name;
         data.description = description;
-        data.price = price;
-        data.from = new Date(from);
-        data.to = new Date(to);
+        data.isActive = isActive;
 
         const errors = await validate(data);
         if (errors.length > 0) {

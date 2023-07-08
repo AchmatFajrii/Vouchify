@@ -121,10 +121,12 @@ model Game {
 }
 
 model GameCategory {
-  id        String   @id @default(uuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  id                 String   @id @default(uuid())
+  name               String
+  cloudinaryPublicId String?
+  image              String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @default(now())
 
   games Game[]
 
@@ -152,18 +154,25 @@ model Discount {
   @@map("discounts")
 }
 
+model Banner {
+  id                 String   @id @default(uuid())
+  name               String
+  cloudinaryPublicId String?
+  image              String?
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @default(now())
+
+  @@map("banners")
+}
+
 model SpecialOffer {
   id          String   @id @default(uuid())
-  voucherId   String
   name        String
   description String
-  price       BigInt
-  from        DateTime
-  to          DateTime
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
-
-  voucher Voucher @relation(fields: [voucherId], references: [id])
 
   @@map("specialOffers")
 }
@@ -177,9 +186,8 @@ model Voucher {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now())
 
-  transactions  Transaction[]
-  discounts     Discount[]
-  specialOffers SpecialOffer[]
+  transactions Transaction[]
+  discounts    Discount[]
 
   game        Game        @relation(fields: [gameId], references: [id])
   voucherType VoucherType @relation(fields: [voucherTypeId], references: [id])

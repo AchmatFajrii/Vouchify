@@ -8,6 +8,7 @@ const passport = require('passport');
 
 
 router.get('/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
+router.post('/google', authController.signGoogle);
 
 router.get('/google/redirect',passport.authenticate('google', { 
     successRedirect: '/auth/google/protected',

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/v-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vochify App</title>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icon -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+    <!-- Library Splide -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- include flowbite -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <!-- include splide library -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <!-- include carousel library -->
+
+    <script>
+      //* COUNTDOWN
+      // Set the date to countdown to
+      const countdown = document.querySelector(".countdown");
+
+      // set the date we're counting down to
+      const countDownDate = new Date().getTime() + 2 * 24 * 60 * 60 * 1000;
+
+      // update the countdown every second
+      const interval = setInterval(function () {
+        // get today's date and time
+        const now = new Date().getTime();
+
+        // find the distance between now and the countdown date
+        const distance = countDownDate - now;
+
+        // calculate days, hours, minutes, and seconds remaining
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // display the result in the countdown element
+  //       countdown.innerHTML = `
+  //     <div class="days">${days.toString().padStart(2, "0")}</div>
+  //     <div class="hours">${hours.toString().padStart(2, "0")}</div>
+  //     <div class="minutes">${minutes.toString().padStart(2, "0")}</div>
+  //     <div class="seconds">${seconds.toString().padStart(2, "0")}</div>
+  // `;
+
+        // if the countdown is finished, clear the interval
+        if (distance < 0) {
+          clearInterval(interval);
+          // countdown.innerHTML = "Countdown finished";
+        }
+      }, 1000);
+
+      //* OWL CAROUSEL
+      let owl = $(".owl-carousel");
+      owl.owlCarousel({
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 4,
+          },
+          600: {
+            items: 5,
+            nav: true,
+          },
+          1000: {
+            items: 7,
+            nav: true,
+            loop: true,
+          },
+        },
+        items: 6,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 1000,
+        autoplayHoverPause: true,
+      });
+      $(".play").on("click", function () {
+        owl.trigger("play.owl.autoplay", [1000]);
+      });
+      $(".stop").on("click", function () {
+        owl.trigger("stop.owl.autoplay");
+      });
+
+      //* ICON
+      feather.replace();
+
+      //* TOGGLE BAR MENU
+      const troliLogin = document.querySelector(".group-troli-login");
+      const menuBar = document.querySelector("#menu-bar");
+
+      menuBar.addEventListener("click", () => {
+        troliLogin.classList.toggle("active");
+      });
+    </script>
+
+  </body>
+</html>

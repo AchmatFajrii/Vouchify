@@ -68,6 +68,7 @@ class GameController {
   }
 
   async findAll(req: Request, res: Response) {
+    let status, message;
     const { skip, take } = req.query;
 
     const data = new FindAllGameCategoryDto();
@@ -96,6 +97,17 @@ class GameController {
           "skip": skip,
           "take": take,
         },
+      },
+      "data": toObject(games) ?? null,
+    });
+  }
+
+  async findLatest(req: Request, res: Response) {
+    const games = await gameService.findLatest();
+
+    return res.status(200).json({
+      "meta": {
+        "message": "Success fetch data!",
       },
       "data": toObject(games) ?? null,
     });

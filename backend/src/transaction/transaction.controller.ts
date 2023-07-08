@@ -23,7 +23,7 @@ const transactionService = new TransactionService();
 class TransactionController {
     async create(req: any, res: Response) {
         const { userId } = req.payload;
-        const { voucherId: voucherId, discountId } = req.body;
+        const { voucherId: voucherId, discountId: discountId } = req.body;
         const currentDate: Date = new Date();
         const transactionNumber: string = "TR" + currentDate.getSeconds().toString() + currentDate.valueOf().toString();
 
@@ -173,7 +173,7 @@ class TransactionController {
             "meta": {
                 "message": message
             },
-            "data": toObject(transaction) ?? null
+            "data": null
         });
 
     }

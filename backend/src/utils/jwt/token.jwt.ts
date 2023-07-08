@@ -16,7 +16,7 @@ function generateRefreshToken(user: any, jti: any) {
         userId: user.id,
         jti
     }, process.env.JWT_REFRESH_SECRET, {
-        expiresIn: '8h',
+        expiresIn: '7d',
     });
 }
 

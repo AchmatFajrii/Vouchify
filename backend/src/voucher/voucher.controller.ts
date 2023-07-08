@@ -7,6 +7,7 @@ import { toObject } from "../utils/provider/convert.provider";
 import { validate } from "class-validator";
 import { FindAllVoucherDto } from "./dto/find-all-voucher.dto";
 import { UpdateVoucherDto } from "./dto/update-voucher.dto";
+import { FindAllVoucherByGameIdDto } from "./dto/find-all-voucher-by-game-id.dto";
 
 const voucherService = new VoucherService();
 const gameService = new GameService();
@@ -61,6 +62,36 @@ class VoucherController {
             },
             "data": voucher != undefined
                 ? toObject(voucher)
+                : null
+        });
+    }
+
+    async findAllByGameId(req: Request, res: Response) {
+        const { gameId } = req.params;
+
+        const data = new FindAllVoucherByGameIdDto();
+
+        // Validation
+        data.gameId = gameId;
+
+        const errors = await validate(data);
+        if (errors.length > 0) {
+            return res.status(400).json({
+                "meta": {
+                    "message": "Failed fetch vouchers"
+                },
+                "data": errors
+            });;
+        }
+        
+        const vouchers = await voucherService.findAllByGameId(data);
+
+        return res.status(200).json({
+            "meta": {
+                "message": "Success fetch voucher",
+            },
+            "data": vouchers != undefined
+                ? toObject(vouchers)
                 : null
         });
     }

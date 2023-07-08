@@ -4,6 +4,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get("/", specialOfferController.findAll)
+router.get("/active", specialOfferController.findActiveSpecialOffer)
 router.post("/", specialOfferController.create)
 router.put("/:id", specialOfferController.update)
 router.get("/:id", specialOfferController.findOne)

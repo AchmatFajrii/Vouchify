@@ -6,14 +6,69 @@ const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const google = require('googleapis').google;
 
 const { generateTokens } = require("../utils/jwt/token.jwt");
 const { hashToken } = require("../utils/jwt/hash-token.jwt");
+const {
+    OAuth2Client,
+} = require('google-auth-library');
 
 const authService = new AuthService();
 
 class AuthController {
+    async signGoogle(req: any, res: Response) {
+        const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+        const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+        
+        const oAuth2Client = new OAuth2Client(
+            GOOGLE_CLIENT_ID,
+            GOOGLE_CLIENT_SECRET,
+            "postmessage"
+        );
 
+        const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for token
+        
+        var oauth2Client = new OAuth2Client();
+        oauth2Client.setCredentials({access_token: tokens.access_token});
+        var oauth2 = google.oauth2({
+            auth: oauth2Client,
+            version: 'v2'
+        });
+
+        const { data } = await oauth2.userinfo.get();
+
+        const oAuthId = data.id;
+        const email = data.email;
+        
+        const jti = uuidv4();
+        const existingUser = await authService.findUserByEmail(email);
+        
+        // If user existing - login method
+        if (existingUser) {
+            const { accessToken, refreshToken } = generateTokens(existingUser, jti);
+
+            return res.json({
+                accessToken,
+                refreshToken,
+            });
+        }
+        
+        const name = req.user.displayName;
+        const user = await authService.createUserByEmail({ email, name });
+        const oAuthProvider = await authService.findOAuthProviderByName('google');
+        const userId = user.id;
+        const oAuthProviderId = oAuthProvider?.id;
+
+        authService.createOAuthUser({ userId, oAuthProviderId, oAuthId });
+        
+        const { accessToken, refreshToken } = generateTokens(user, jti);
+        
+        return res.json({
+            accessToken,
+            refreshToken,
+        });
+    }
     async authByGoogle(req: any, res: Response) {
         const oAuthId = req.user['id'];
         const email = req.user['emails'][0]['value'];
@@ -41,7 +96,6 @@ class AuthController {
         
         const { accessToken, refreshToken } = generateTokens(user, jti);
         
-        
         return res.json({
             accessToken,
             refreshToken,
@@ -49,7 +103,7 @@ class AuthController {
     }
 
     async create(req: Request, res: Response) {
-        const { email, password } = req.body;
+        const { name, gender, phoneNumber, email, password } = req.body;
 
         if (!email || !password) {
             res.status(400);
@@ -67,7 +121,7 @@ class AuthController {
             })
         }
 
-        const user = await authService.createUserByEmailAndPassword({ email, password });
+        const user = await authService.createUserByEmailAndPassword({ name, gender, phoneNumber, email, password });
         const jti = uuidv4();
         const { accessToken, refreshToken } = generateTokens(user, jti);
         await authService.addRefreshTokenToWhitelist({ jti, refreshToken, userId: user.id });

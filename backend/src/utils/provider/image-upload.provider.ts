@@ -9,7 +9,9 @@ interface IUploadImage {
 
 export enum FolderLocation {
   Game = "Game",
+  GameCategory = "GameCategory",
   Transaction = "Transaction",
+  Banner = "Banner",
 }
 
 cloudinary.config({
@@ -20,22 +22,38 @@ cloudinary.config({
 
 export function uploadImageProvider(file: any, folderLocation: FolderLocation): Promise<IUploadImage> {
   let folder: string;
+  let width: number, height: number;
+
   switch (folderLocation) {
     case FolderLocation.Game:
       folder = "vochify/assets/images/games/";
+      width = 512;
+      height = 512;
+      break;
+    case FolderLocation.GameCategory:
+      folder = "vochify/assets/images/game-categories/";
+      width = 250;
+      height = 250;
+      break;
+    case FolderLocation.Banner:
+      folder = "vochify/assets/images/banners/";
+      width = 1024;
+      height = 1024;
       break;
 
     default:
       folder = "vochify/assets/images/transactions/";
+      width = 250;
+      height = 250;
       break;
   }
 
   return new Promise((resolve) => {
     cloudinary.uploader.upload_stream({
       resource_type: 'auto',
-      width: 250,
-      height: 250,
-      crop: "pad",
+      width: width,
+      height: height,
+      crop: "fit",
       folder: folder,
     }, function (error: any, result: any) {
       if (!error && result.url) {

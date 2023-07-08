@@ -10,15 +10,5 @@ export class UpdateSpecialOfferDto implements Prisma.SpecialOfferUpdateInput {
     description: string
 
     @Expose()
-    @IsInt({ message: "Please insert special offer price" })
-    price: number | bigint
-
-    @Expose()
-    from: Date
-
-    @Expose()
-    to: Date
-
-    @Expose()
-    voucherId: string
+    isActive: boolean
 }

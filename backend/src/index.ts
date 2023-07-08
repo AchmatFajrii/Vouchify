@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 
-const authRoutes = require("./auth/auth.route")
+const bannerRoutes = require('./banner/banner.route');
+const authRoutes = require("./auth/auth.route");
 const gameCategoryRoutes = require("./game-category/game-category.routes");
 const gameRoutes = require("./game/game.routes");
 const specialOfferRoutes = require("./special-offer/special-offer.route");
@@ -23,14 +24,16 @@ class App {
     const helmet = require("helmet");
     const session = require('express-session');
     const passport = require('passport');
-    const fileUpload = require('express-fileupload')
-
+    const fileUpload = require('express-fileupload');
+    const cors = require('cors');
+    
     this.app.use(bodyParser.json({ limit: '50mb' }));
     this.app.use(bodyParser.urlencoded({
       limit: '50mb',
       extended: true,
       parameterLimit: 50000
     }));
+    this.app.use(cors());
     this.app.use(helmet());
     this.app.use(session({secret: 'cats'}));
     this.app.use(passport.initialize());
@@ -47,6 +50,7 @@ class App {
       res.send("Welcome home");
     });
 
+    this.app.use('/banners', bannerRoutes);
     this.app.use('/auth', authRoutes);
     this.app.use("/game-categories", gameCategoryRoutes);
     this.app.use("/special-offers", specialOfferRoutes);

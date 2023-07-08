@@ -24,14 +24,30 @@ export class GameService {
   async findAll(data: FindAllGameDto) {
     return await prisma.game.findMany({
       skip: data.skip * data.take,
-      take: data.take
+      take: data.take,
+      include: {
+        gameCategory: true
+      }
+    });
+  }
+
+  async findLatest() {
+    return await prisma.game.findMany({
+      take: 5,
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
   }
 
   async findOne(id: string) {
     return await prisma.game.findFirst({
-      where: { id },
-      include: { gameCategory: true }
+      where: { 
+        id: id,
+       },
+      include: { 
+        gameCategory: true,
+       }
     })
   }
 

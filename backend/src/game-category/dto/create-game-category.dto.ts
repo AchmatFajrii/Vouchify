@@ -7,4 +7,11 @@ export class CreateGameCategoryDto implements Prisma.GameCategoryCreateInput {
   @IsNotEmpty()
   @MinLength(5, { message: "Minimal 5 characters." })
   name: string;
+
+  @Expose()
+  cloudinaryPublicId: string
+  
+  @Expose()
+  @IsNotEmpty({message: "Please add a image of game category"})
+  image: string;
 }

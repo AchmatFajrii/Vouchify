@@ -11,14 +11,7 @@ export class SpecialOfferService {
             data: {
                 name: data.name,
                 description: data.description,
-                price: data.price,
-                from: data.from,
-                to: data.to,
-                voucher: {
-                    connect: {
-                        id: data.voucherId
-                    }
-                }
+                isActive: data.isActive,
             }
         })
     }
@@ -26,7 +19,15 @@ export class SpecialOfferService {
     async findAll(data: FindAllSpecialOfferDto) {
         return await prisma.specialOffer.findMany({
             skip: data.skip * data.take,
-            take: data.take
+            take: data.take,
+        });
+    }
+
+    async findActiveSpecialOffer() {
+        return await prisma.specialOffer.findMany({
+            where: {
+                isActive: true
+            }
         });
     }
 

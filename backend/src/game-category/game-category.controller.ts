@@ -6,17 +6,41 @@ import { Request, Response } from "express";
 import { validate } from "class-validator";
 import { toObject } from "../utils/provider/convert.provider";
 import { FindAllGameCategoryDto } from "./dto/find-all-game-category.dto";
+import { FolderLocation, removeImageProvider, uploadImageProvider } from "../utils/provider/image-upload.provider";
 
 const gameCategoryService = new GameCategoryService();
 
 class GameCategoryController {
   async create(req: Request, res: Response) {
     let message;
+    const { image } = req.body;
 
+    if (!image) {
+      return res.status(400).json({ 
+        "meta": {
+          "message": "Please insert image of game category"
+        }
+       });
+    }
+    
+    const file = "data:image/png;base64," + image;
     const data = new CreateGameCategoryDto();
     const { name } = req.body;
 
     data.name = name;
+
+    // Upload image to cloudinary
+    await uploadImageProvider(file, FolderLocation.GameCategory).then(value => {
+      console.log(value);
+      if (value.status == 'success') {
+        data.cloudinaryPublicId = value.publicId;
+        data.image = value.url;
+
+        message = 'Success created a new game';
+      } else {
+        message = 'Failed while upload image';
+      }
+    });
 
     const errors = await validate(data);
     if (errors.length > 0) {
