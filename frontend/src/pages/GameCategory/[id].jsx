@@ -28,6 +28,11 @@ const DetailGameCategory = () => {
                       </div>
                       <div className="card-info text-[0.6rem] md:text-[1rem]">
                         <p className="text-title">{game.name}</p>
+                        <p className="text-base">
+                          {game.description.length > 100 ?
+                            `${game.description.substring(0, 100)}...` : game.description
+                          }
+                        </p>
                       </div>
                     </div>
                   </Link>

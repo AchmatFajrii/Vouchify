@@ -32,7 +32,7 @@ const CardCategoryGames = () => {
     
   return (
     <>
-      <ul className="flex flex-wrap justify-start gap-[2px] mt-4 md:mt-6">
+      <ul className="flex flex-wrap justify-start gap-4 mt-4 md:mt-6">
         {gameCategories.data.map((gameCategory, index) => {
           return (
             <>
@@ -44,7 +44,7 @@ const CardCategoryGames = () => {
                         ? <img src={gameCategory.image} alt="gameCategory.name" className="h-20 object-cover" />
                         : <></>
                       }
-                      <span>{gameCategory.name}</span>
+                      <span className="text-center text-sm px-4">{gameCategory.name}</span>
                     </div>
                   </div>
                 </Link>

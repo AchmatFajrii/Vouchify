@@ -91,7 +91,7 @@ const DetailGame = () => {
             if (discount.type == 'Price') {
                 discountPrice = discount.value;
             } else {
-                discountPrice = (voucher.price * discount.value);
+                discountPrice = (voucher.price * discount.value) / 100;
             }
 
             price = voucher.price - discountPrice;
@@ -178,12 +178,12 @@ const DetailGame = () => {
                             </div>
                             
                                 <div className="w-full mx-auto shadow-md rounded mb-4 flex flex-col">
-                                    <div className="mb-4">
+                                    <div className="grid grid-cols-3 gap-4 mb-4">
                                         {vouchers.data.map((voucher, index) => {
                                             return <>
                                                 <span className={"border-2 border-secondary p-4 rounded-xl cursor-pointer text-base transition-colors " + (voucherId == voucher.id ? 'bg-secondary' : '')} 
                                                     onClick={(e) => changeVoucherId(voucher)}>
-                                                        {voucher.voucherType.name}  { parse(convertPrice(voucher)) }
+                                                        ({voucher.name} {voucher.voucherType.name}) Rp { parse(convertPrice(voucher)) }
                                                         {/* { voucher.discounts != null && voucher.discounts.length > 0 ? (<><span className="line-through">{voucher.price}</span> <sup> {voucher.discounts[0].value}</sup></>) : (<span>{ voucher.price }</span>)} */}
                                              
                                                 </span>

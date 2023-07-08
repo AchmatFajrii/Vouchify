@@ -14,7 +14,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const CardTopGames = () => {
-  const baseURL = "http://localhost:3000/games?skip=0&take=10";
+  const baseURL = "http://localhost:3000/games?skip=0&take=20";
   const [games, setGames] = React.useState(null);
 
   React.useEffect(() => {
@@ -38,7 +38,6 @@ const CardTopGames = () => {
                 </div>
                 <div className="card-info text-[0.6rem] md:text-[1rem]">
                   <p className="text-title">{game.name}</p>
-                  <p className="text-body">{game.gameCategory.name}</p>
                 </div>
                 <div className="card-footer flex justify-between items-center pt-2">
                   <div className="card-button hover:text-white px-4 py-2">

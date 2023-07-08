@@ -46,7 +46,7 @@ const CardGames = () => {
   return (
     <>
       <div className="card-games-release w-[400px] hidden rounded-lg lg:block">
-        <ul className="list-card-games flex flex-col justify-between h-full border-2 border-white overflow-hidden rounded-lg">
+        <ul className="list-card-games flex flex-col justify-start h-full border-2 border-white overflow-hidden rounded-lg">
           {games.data.map((game, index) => {
             return (
               <>
@@ -55,20 +55,20 @@ const CardGames = () => {
                   className="card-games p-3 text-white transition-all duration-100 ease-linear border-[1px] border-secondary hover:bg-secondary"
                 >
                   <Link to={`/games/${game.id}`} className="flex gap-4">
-                    <div className="img-card w-[60%] rounded-lg">
+                    <div className="w-24 img-card rounded-lg">
                       <img
-                        className="w-20 rounded-lg object-cover"
+                        className="w-16 h-16 rounded-lg object-cover"
                         src={game.image}
                         alt=""
                       />
                     </div>
-                    <div className="card-description ml-2">
-                      <p className="text-xs">{game.name}</p>
+                    <div className="card-description flex flex-col gap-2">
+                      <p className="text-base">{game.name}</p>
                       <p className="text-sm font-bold">
-                      {game.description.length > 50 ?
-    `${game.description.substring(0, 50)}...` : game.description
-  }
-  </p>
+                        {game.description.length > 50 ?
+                          `${game.description.substring(0, 50)}...` : game.description
+                        }
+                      </p>
                     </div>
                   </Link>
                 </li>
